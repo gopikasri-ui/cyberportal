@@ -1,0 +1,106 @@
+type Timestamp = int;
+type ThreatFeed = 
+ record {
+   description: text;
+   feedId: FeedId;
+   publishedAt: Timestamp;
+   severity: text;
+   source: text;
+   title: text;
+ };
+type Stats = 
+ record {
+   avgResponseMinutes: float64;
+   criticalAlertCount: nat;
+   incidentsThisWeek: nat;
+   incidentsToday: nat;
+ };
+type IocId = text;
+type IncidentView = 
+ record {
+   affectedSystems: vec AffectedSystem;
+   businessImpact: text;
+   dataExposed: text;
+   hostnames: text;
+   id: IncidentId;
+   qrCode: opt text;
+   severity: text;
+   status: text;
+   systems: text;
+   timestamp: Timestamp;
+   "type": text;
+   userAccounts: text;
+   usersAffected: nat;
+ };
+type IncidentId = text;
+type IOC = 
+ record {
+   addedAt: Timestamp;
+   iocId: IocId;
+   iocType: text;
+   severity: text;
+   value: text;
+ };
+type FeedId = text;
+type CreateIncidentArgs = 
+ record {
+   affectedSystems: vec AffectedSystem;
+   businessImpact: text;
+   dataExposed: text;
+   hostnames: text;
+   id: IncidentId;
+   qrCode: opt text;
+   severity: text;
+   status: text;
+   systems: text;
+   timestamp: Timestamp;
+   "type": text;
+   userAccounts: text;
+   usersAffected: nat;
+ };
+type CreateAlertArgs = 
+ record {
+   description: text;
+   id: AlertId;
+   severity: text;
+   source: text;
+   timestamp: Timestamp;
+   title: text;
+ };
+type AlertView = 
+ record {
+   acknowledged: bool;
+   description: text;
+   falsePositive: bool;
+   id: AlertId;
+   incidentId: opt IncidentId;
+   severity: text;
+   source: text;
+   timestamp: Timestamp;
+   title: text;
+ };
+type AlertId = text;
+type AffectedSystem = 
+ record {
+   compromiseDate: text;
+   criticality: text;
+   detectionMethod: text;
+   systemName: text;
+   systemType: text;
+ };
+service : {
+  acknowledgeAlert: (id: AlertId) -> (bool);
+  createAlert: (args: CreateAlertArgs) -> ();
+  createIncident: (args: CreateIncidentArgs) -> ();
+  deleteIncident: (id: IncidentId) -> (bool);
+  getIncident: (id: IncidentId) -> (opt IncidentView) query;
+  getStats: () -> (Stats) query;
+  linkAlertToIncident: (alertId: AlertId, incidentId: IncidentId) -> (bool);
+  listAlerts: () -> (vec AlertView) query;
+  listIOCs: () -> (vec IOC) query;
+  listIncidents: () -> (vec IncidentView) query;
+  listThreatFeeds: () -> (vec ThreatFeed) query;
+  markAlertFalsePositive: (id: AlertId) -> (bool);
+  updateIncidentQrCode: (id: IncidentId, qrCode: text) -> (bool);
+  updateIncidentStatus: (id: IncidentId, newStatus: text) -> (bool);
+}

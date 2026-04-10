@@ -1,0 +1,87 @@
+// Version: 1.0.0
+type AffectedSystem__839671209 =
+  {
+    compromiseDate : Text;
+    criticality : Text;
+    detectionMethod : Text;
+    systemName : Text;
+    systemType : Text
+  };
+type AlertId__758494499 = Text;
+type Alert__607610635 =
+  {
+    var acknowledged : Bool;
+    description : Text;
+    var falsePositive : Bool;
+    id : AlertId__758494499;
+    var incidentId : ?IncidentId__610298952;
+    severity : Text;
+    source : Text;
+    timestamp : Timestamp__301639476;
+    title : Text
+  };
+type FeedId__721923343 = Text;
+type IOC__717514174 =
+  {
+    addedAt : Timestamp__301639476;
+    iocId : IocId__124855314;
+    iocType : Text;
+    severity : Text;
+    value : Text
+  };
+type IncidentId__610298952 = Text;
+type Incident__14973281 =
+  {
+    var affectedSystems : [AffectedSystem__839671209];
+    businessImpact : Text;
+    dataExposed : Text;
+    hostnames : Text;
+    id : IncidentId__610298952;
+    var qrCode : ?Text;
+    severity : Text;
+    var status : Text;
+    systems : Text;
+    timestamp : Timestamp__301639476;
+    type_ : Text;
+    userAccounts : Text;
+    usersAffected : Nat
+  };
+type IocId__124855314 = Text;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type ThreatFeed__502713219 =
+  {
+    description : Text;
+    feedId : FeedId__721923343;
+    publishedAt : Timestamp__301639476;
+    severity : Text;
+    source : Text;
+    title : Text
+  };
+type Timestamp__301639476 = Int;
+actor {
+  stable alerts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Alert__607610635]];
+      var elementIndex : Nat__490723111
+    };
+  stable feeds :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ThreatFeed__502713219]];
+      var elementIndex : Nat__490723111
+    };
+  stable incidents :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Incident__14973281]];
+      var elementIndex : Nat__490723111
+    };
+  stable iocs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?IOC__717514174]];
+      var elementIndex : Nat__490723111
+    }
+};

@@ -1,0 +1,25 @@
+{
+  "overview": "CyberPortal is a professional-grade cyber incident reporting platform for security operations teams. It provides a full incident lifecycle — from reporting to resolution — with real-time dashboards, threat intelligence, alerts management, and QR-based incident sharing. Designed for SOC analysts with a dark glassmorphic cyber theme and full mobile responsiveness.",
+  "features": [
+    "3-tab incident report form with voice input (6 languages), file upload, and QR generation",
+    "Live dashboard with metrics cards, pie/bar/severity charts, and critical alerts table",
+    "All Incidents page with search, filter, sort, CSV export, pagination, and detail modal",
+    "Track & Timeline page with vertical incident lifecycle visualization",
+    "Threat Intelligence page with IOC indicators and severity heatmap",
+    "Alerts management with severity filtering, acknowledge, false positive, and create-incident actions",
+    "Dark cyber glassmorphic theme with neon accents and mobile-responsive sidebar",
+    "Motoko backend with full CRUD for incidents and alerts plus sample data preload"
+  ],
+  "category": "security-operations",
+  "tags": [
+    "cybersecurity",
+    "incident-reporting",
+    "soc",
+    "dashboard",
+    "dark-theme",
+    "voice-input",
+    "qr-code",
+    "file-upload"
+  ],
+  "last_updated": "2026-04-10T15:29:13.145Z"
+}

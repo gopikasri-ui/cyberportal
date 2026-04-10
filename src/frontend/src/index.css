@@ -1,0 +1,341 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Plus Jakarta Sans", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", monospace;
+    --radius: 0.5rem;
+
+    /* Light mode — not used, app is always dark */
+    --background: 0.99 0 0;
+    --foreground: 0.15 0 0;
+    --card: 0.96 0.01 240;
+    --card-foreground: 0.15 0 0;
+    --popover: 0.97 0 0;
+    --popover-foreground: 0.15 0 0;
+    --primary: 0.65 0.22 265;
+    --primary-foreground: 0.98 0 0;
+    --secondary: 0.93 0.05 180;
+    --secondary-foreground: 0.25 0 0;
+    --muted: 0.91 0 0;
+    --muted-foreground: 0.5 0 0;
+    --accent: 0.65 0.22 265;
+    --accent-foreground: 0.98 0 0;
+    --destructive: 0.58 0.24 20;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.88 0.04 260;
+    --input: 0.92 0.02 270;
+    --ring: 0.65 0.22 265;
+    --chart-1: 0.65 0.22 265;
+    --chart-2: 0.72 0.18 168;
+    --chart-3: 0.68 0.22 100;
+    --chart-4: 0.62 0.24 40;
+    --chart-5: 0.65 0.23 25;
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.65 0.22 265;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.91 0 0;
+    --sidebar-accent-foreground: 0.25 0 0;
+    --sidebar-border: 0.88 0.04 260;
+    --sidebar-ring: 0.65 0.22 265;
+  }
+
+  .dark {
+    /* #0a0e27 → OKLCH ≈ 0.10 0.04 265 */
+    --background: 0.1 0.04 265;
+    /* #1a1f3a → OKLCH ≈ 0.16 0.05 262 */
+    --card: 0.16 0.05 262;
+    --card-foreground: 0.93 0.02 220;
+    --popover: 0.16 0.05 262;
+    --popover-foreground: 0.93 0.02 220;
+    /* #eef2ff text */
+    --foreground: 0.93 0.02 220;
+    /* #6b8cff blue → OKLCH ≈ 0.62 0.20 263 */
+    --primary: 0.62 0.2 263;
+    --primary-foreground: 0.1 0.04 265;
+    /* #2de3a5 green → OKLCH ≈ 0.78 0.18 168 */
+    --secondary: 0.78 0.18 168;
+    --secondary-foreground: 0.1 0.04 265;
+    /* #1a1f3a muted panel */
+    --muted: 0.18 0.04 260;
+    /* #8d9ee0 secondary text → OKLCH ≈ 0.63 0.07 255 */
+    --muted-foreground: 0.63 0.07 255;
+    --accent: 0.62 0.2 263;
+    --accent-foreground: 0.1 0.04 265;
+    /* #ff4757 critical → OKLCH ≈ 0.60 0.24 20 */
+    --destructive: 0.6 0.24 20;
+    --destructive-foreground: 0.93 0.02 220;
+    /* #2a2f6b border → OKLCH ≈ 0.24 0.07 265 */
+    --border: 0.24 0.07 265;
+    --input: 0.22 0.06 265;
+    --ring: 0.62 0.2 263;
+    /* Chart colors: blue, green, orange, red, yellow */
+    --chart-1: 0.62 0.2 263;
+    --chart-2: 0.78 0.18 168;
+    --chart-3: 0.68 0.2 50;
+    --chart-4: 0.6 0.24 20;
+    --chart-5: 0.75 0.18 90;
+    --sidebar: 0.14 0.04 263;
+    --sidebar-foreground: 0.93 0.02 220;
+    --sidebar-primary: 0.62 0.2 263;
+    --sidebar-primary-foreground: 0.1 0.04 265;
+    --sidebar-accent: 0.2 0.05 262;
+    --sidebar-accent-foreground: 0.93 0.02 220;
+    --sidebar-border: 0.24 0.07 265;
+    --sidebar-ring: 0.62 0.2 263;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-color: #0a0e27;
+  }
+
+  /* Force dark mode globally */
+  html,
+  body,
+  #root {
+    @apply dark;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-colors-fast {
+    transition: color 0.15s ease, background-color 0.15s ease, border-color
+      0.15s ease;
+  }
+
+  /* Glassmorphic base — dark blue panel with frosted blur */
+  .glassmorphic {
+    background: rgba(26, 31, 58, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(107, 140, 255, 0.15);
+  }
+
+  /* Glassmorphic card — heavier frost */
+  .glassmorphic-card {
+    background: rgba(26, 31, 58, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(107, 140, 255, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0
+      rgba(107, 140, 255, 0.08);
+  }
+
+  /* Sidebar panel */
+  .glassmorphic-sidebar {
+    background: rgba(20, 24, 50, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(107, 140, 255, 0.18);
+  }
+
+  /* Header */
+  .glassmorphic-header {
+    background: rgba(20, 24, 50, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(107, 140, 255, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(107, 140, 255, 0.25), 0 0 40px
+      rgba(107, 140, 255, 0.1);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(45, 227, 165, 0.25), 0 0 40px
+      rgba(45, 227, 165, 0.1);
+  }
+
+  .glow-critical {
+    box-shadow: 0 0 16px rgba(255, 71, 87, 0.4), 0 0 32px rgba(255, 71, 87, 0.2);
+  }
+
+  .text-cyber-blue {
+    color: #6b8cff;
+  }
+  .text-cyber-green {
+    color: #2de3a5;
+  }
+  .text-cyber-critical {
+    color: #ff4757;
+  }
+  .text-cyber-warning {
+    color: #ffb347;
+  }
+  .text-cyber-secondary {
+    color: #8d9ee0;
+  }
+
+  .bg-cyber-bg {
+    background-color: #0a0e27;
+  }
+  .bg-cyber-panel {
+    background-color: #1a1f3a;
+  }
+  .bg-cyber-blue {
+    background-color: #6b8cff;
+  }
+  .bg-cyber-green {
+    background-color: #2de3a5;
+  }
+  .bg-cyber-critical {
+    background-color: #ff4757;
+  }
+  .bg-cyber-warning {
+    background-color: #ffb347;
+  }
+  .border-cyber-border {
+    border-color: #2a2f6b;
+  }
+
+  /* Pulsing critical alert badge */
+  .pulse-critical {
+    animation: pulse-critical 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-critical {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+      opacity: 1;
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(255, 71, 87, 0);
+      opacity: 0.85;
+    }
+  }
+
+  /* Pulsing dot indicator */
+  .pulse-dot {
+    animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.3);
+    }
+  }
+
+  /* Blue glow keyframes for active nav items */
+  @keyframes glow-blue {
+    0%,
+    100% {
+      box-shadow: 0 0 8px rgba(107, 140, 255, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 16px rgba(107, 140, 255, 0.6);
+    }
+  }
+
+  .glow-blue-pulse {
+    animation: glow-blue 3s ease-in-out infinite;
+  }
+
+  /* Grid background pattern for cyber aesthetic */
+  .cyber-grid {
+    background-image: linear-gradient(
+        rgba(107, 140, 255, 0.03) 1px,
+        transparent 1px
+      ), linear-gradient(90deg, rgba(107, 140, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(26, 31, 58, 0.4);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(107, 140, 255, 0.3);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 140, 255, 0.5);
+  }
+
+  /* Tab active indicator */
+  .tab-active-indicator {
+    position: relative;
+  }
+  .tab-active-indicator::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #6b8cff;
+    border-radius: 1px 1px 0 0;
+    box-shadow: 0 0 8px rgba(107, 140, 255, 0.6);
+  }
+
+  /* Input cyber style */
+  .input-cyber {
+    background: rgba(26, 31, 58, 0.8);
+    border: 1px solid rgba(42, 47, 107, 0.8);
+    color: #eef2ff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .input-cyber:focus {
+    border-color: rgba(107, 140, 255, 0.6);
+    box-shadow: 0 0 0 2px rgba(107, 140, 255, 0.15);
+    outline: none;
+  }
+  .input-cyber::placeholder {
+    color: #8d9ee0;
+    opacity: 0.7;
+  }
+
+  /* Status badges */
+  .badge-critical {
+    background: rgba(255, 71, 87, 0.15);
+    color: #ff4757;
+    border: 1px solid rgba(255, 71, 87, 0.35);
+  }
+  .badge-high {
+    background: rgba(255, 179, 71, 0.15);
+    color: #ffb347;
+    border: 1px solid rgba(255, 179, 71, 0.35);
+  }
+  .badge-medium {
+    background: rgba(107, 140, 255, 0.15);
+    color: #6b8cff;
+    border: 1px solid rgba(107, 140, 255, 0.35);
+  }
+  .badge-low {
+    background: rgba(45, 227, 165, 0.15);
+    color: #2de3a5;
+    border: 1px solid rgba(45, 227, 165, 0.35);
+  }
+}
